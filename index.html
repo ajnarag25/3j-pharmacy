@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>Admin Dashboard - 3J's Pharmacy</title>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="js/login.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  </head>
+  <body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <h3 style="text-align: center; margin: 0 auto; display: table; margin-top: 30px;">3J's Pharmacy</h3>
+      <ul class="side-menu top">
+        <li class="active">
+          <a href="index.html">
+            <i class="bx bx-user-pin"></i>
+            <span class="text">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="users.html">
+            <i class="bx bxs-user-account"></i>
+            <span class="text">Accounts</span>
+          </a>
+        </li>
+       <li>
+				<a href="about.html">
+					<i class='bx bxs-group' ></i>
+					<span class="text">About Us</span>
+				</a>
+			</li>
+      </ul>
+      <ul class="side-menu">
+        <li>
+          <a href="#" class="logout" id="logout">
+            <i class="bx bxs-log-out-circle"></i>
+            <span class="text">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <section id="content">
+      <nav>
+        <i class="bx bx-menu"></i>
+        <form action="#">
+          <div class="form-input">
+
+          </div>
+        </form>
+        <input type="checkbox" id="switch-mode" hidden />
+        <label for="switch-mode" class="switch-mode"></label>
+      </nav>
+
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Admin Dashboard</h1>
+          </div>
+        </div>
+
+         <ul class="box-info">
+          <a href="sales.html">
+          <li>
+            <i class="bx bxs-calendar"></i>
+            <span class="text">
+              <p>Daily Sales Report</p>
+            </span>
+          </li>
+        </a>
+        <a href="orders.html">
+          <li>
+            <i class="bx bx-book"></i>
+            <span class="text">
+              <p>View ordered prescription</p>
+            </span>
+          </li>
+        </a>
+        <a href="inventory.html">
+          <li>
+            <i class="bx bxs-basket"></i>
+            <span class="text">
+              <p>Inventory List</p>
+            </span>
+          </li>
+        </a>
+          <li>
+            <i class="bx bxs-package"></i>
+            <span class="text">
+              <p>Ongoing Deliveries</p>
+            </span>
+          </li>
+        </ul> 
+
+
+      </main>
+      <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+    <script type="module">
+
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+          import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-analytics.js";
+          import { getDatabase, push, set, ref, update, child, onValue, get, remove, onChildAdded, onChildChanged  } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+          import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendEmailVerification, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyAFfe8nm3qu9OP7wzTZXsqpsgSCBKVk4p0",
+    authDomain: "j3spharmacy-d91bd.firebaseapp.com",
+    databaseURL: "https://j3spharmacy-d91bd-default-rtdb.firebaseio.com",
+    projectId: "j3spharmacy-d91bd",
+    storageBucket: "j3spharmacy-d91bd.appspot.com",
+    messagingSenderId: "32981017461",
+    appId: "1:32981017461:web:85f0285adba6507e41293c",
+    measurementId: "G-7TQ3FHGBST"
+  };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth();
+
+      const logout = document.getElementById("logout");
+
+
+      
+  auth.onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in
+    console.log("User is logged in");
+    // Add your code to show content for authenticated users here
+  } else {
+    // User is signed out
+    console.log("User is logged out");
+    // Add your code to show content for non-authenticated users here
+  }
+});
+
+  //function to logout user
+  logout.addEventListener("click", function(){
+    signOut(auth).then(function() {
+      // Sign-out successful.
+      console.log("User is logged out");
+      window.location.href = "login.html";
+    }).catch(function(error) {
+      // An error happened.
+      console.log(error);
+    });
+  });
+
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

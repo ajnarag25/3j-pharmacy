@@ -1,0 +1,69 @@
+.container {
+  width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  /* border: 2px solid red; */
+  font-family: arial;
+  font-size: 16px;
+  border-radius: 20px;
+  text-align: center;
+  padding-top: 20px;
+  font-weight: bold;
+}
+.container div {
+  text-align: center;
+}
+body.dark {
+  --light: #0c0c1e;
+  --grey: #060714;
+  --dark: #fbfbfb;
+}
+
+.container button {
+  margin-left: 20px;
+}
+input .class {
+  width: 450px;
+  padding: 5px;
+  text-align: center;
+}
+
+.container #signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.container #signup-form .email-align {
+  margin-left: 30px;
+}
+
+button {
+  width: 70px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  background-color: cornflowerblue;
+  border: none;
+  color: white;
+  border-radius: 10px;
+}
+
+.display {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10;
+  padding-left: 30px;
+}
+
+.display .form {
+  text-align: end;
+}
