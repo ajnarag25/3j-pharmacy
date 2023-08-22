@@ -41,19 +41,19 @@
 
       <ul class="side-menu top">
         <li >
-          <a href="index.html">
+          <a href="index.php">
             <i class="bx bx-user-pin"></i>
             <span class="text">Dashboard</span>
           </a>
         </li>
         <li class="active">
-          <a href="users.html">
+          <a href="users.php">
             <i class="bx bxs-user-account"></i>
             <span class="text">Accounts</span>
           </a>
         </li>
        <li>
-				<a href="about.html">
+				<a href="about.php">
 					<i class='bx bxs-group' ></i>
 					<span class="text">About Us</span>
 				</a>

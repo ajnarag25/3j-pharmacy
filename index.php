@@ -26,19 +26,19 @@ include('config.php');
     <h3 style="text-align: center; margin: 0 auto; display: table; margin-top: 30px;">3J's Pharmacy</h3>
     <ul class="side-menu top">
       <li class="active">
-        <a href="index.html">
+        <a href="index.php">
           <i class="bx bx-user-pin"></i>
           <span class="text">Dashboard</span>
         </a>
       </li>
       <li>
-        <a href="users.html">
+        <a href="users.php">
           <i class="bx bxs-user-account"></i>
           <span class="text">Accounts</span>
         </a>
       </li>
       <li>
-        <a href="about.html">
+        <a href="about.php">
           <i class='bx bxs-group'></i>
           <span class="text">About Us</span>
         </a>
@@ -75,7 +75,7 @@ include('config.php');
       </div>
 
       <ul class="box-info">
-        <a href="sales.html">
+        <a href="sales.php">
           <li>
             <i class="bx bxs-calendar"></i>
             <span class="text">
@@ -83,7 +83,7 @@ include('config.php');
             </span>
           </li>
         </a>
-        <a href="orders.html">
+        <a href="orders.php">
           <li>
             <i class="bx bx-book"></i>
             <span class="text">
@@ -91,7 +91,7 @@ include('config.php');
             </span>
           </li>
         </a>
-        <a href="inventory.html">
+        <a href="inventory.php">
           <li>
             <i class="bx bxs-basket"></i>
             <span class="text">
