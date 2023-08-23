@@ -1,9 +1,3 @@
-<?php 
-
-include('config.php');
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +9,9 @@ include('config.php');
   <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
   <!-- My CSS -->
   <link rel="stylesheet" href="css/style.css" />
-  <!-- <link rel="stylesheet" href="css/bootstrap.css" /> -->
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="css/Analytics.css" />
+    <link rel="stylesheet" href="css/crud.css" />
   <title>Admin Dashboard - 3J's Pharmacy</title>
 
 </head>
@@ -115,6 +111,8 @@ include('config.php');
   <!--Scripts-->
   <script src="js/login.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.js"></script>
 
 </body>
 
