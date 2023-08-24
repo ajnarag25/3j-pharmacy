@@ -20,7 +20,6 @@ include('db_conn.php');
     <link rel="stylesheet" href="css/style.css" />
 
     <title>Accounts | 3J's Pharmacy</title>
-    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase.js"></script>
     <style>
       canvas {
         max-width: 700px;
@@ -85,68 +84,147 @@ include('db_conn.php');
       <div class="table-data">
           <div class="order">
             <div class="head">
-              <h3>Orders & Prescription</h3>
+              <h3>Manage Users</h3>
               <div>
                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add">Add</button>
+                 <!-- Modal Add Account-->
+                <div class="modal fade" id="add" tabindex="-1" aria-labelledby="add" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title text-dark" id="add">Add User's</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form action="functions.php" method="POST">
+                        <div class="modal-body">
+                            <label class="text-dark" for="">UID</label>
+                            <input class="form-control" type="text" name="uid" required>
+                            <label class="text-dark" for="">Full Name</label>
+                            <input class="form-control" type="text" name="fname" required>
+                            <label class="text-dark" for="">Email</label>
+                            <input class="form-control" type="text" name="email" required>
+                            <label class="text-dark" for="">Contact no.</label>
+                            <input class="form-control" type="text" name="contact" required>
+                            <label class="text-dark" for="">City</label>
+                            <input class="form-control" type="text" name="city" required>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-success" name="add_user">Add</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <table id="myTable">
               <thead>
                 <tr>
-                  <th>Order ID</th>
-                  <th>Date & Time</th>
-                  <th>Total Price</th>
-                  <th>Status</th>
-                  <th>Product Name</th>
+                  <th>UID</th>
+                  <th>Fullname</th>
+                  <th>Email</th>
+                  <th>Contact</th>
+                  <th>City</th>
                   <th>Action</th>
                 </tr>
               </thead>
-              <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Germany</td>
-                <td>Germany</td>
-                <td>
-                  <button class="btn btn-primary">Edit</button>
-                  <button class="btn btn-danger">Delete</button>
-                </td>
-              </tr>
+              <?php 
+                include('db_conn.php');
+
+                $ref_table = "users";
+                $fetchdata = $database->getReference($ref_table)->getValue();
+
+                if($fetchdata > 0){
+                  $i=0;
+                  foreach($fetchdata as $key => $row){
+                    ?>
+                      <tr>
+                        <td><?php echo $row['uid'] ?></td>
+                        <td><?php echo $row['fullname'] ?></td>
+                        <td><?php echo $row['email'] ?></td>
+                        <td><?php echo $row['contact'] ?></td>
+                        <td><?php echo $row['city'] ?></td>
+                        <td>
+                          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit<?php echo $key; ?>">Edit</button>
+                          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?php echo $key; ?>">Delete</button>
+                        </td>
+                      </tr>
+
+                      <!--Modal Edit-->
+                      <div class="modal fade" id="edit<?php echo $key; ?>" tabindex="-1" aria-labelledby="edit" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title text-dark">Edit Account of <?php echo $row['fullname'] ?></h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="functions.php" method="POST">
+                              <div class="modal-body">
+                                  <input type="hidden" name="pk" value="<?php echo $key ?>">
+                                  <label class="text-dark" for="">UID</label>
+                                  <input class="form-control" type="text" name="uid" value="<?php echo $row['uid'] ?>" required>
+                                  <label class="text-dark" for="">Full Name</label>
+                                  <input class="form-control" type="text" name="fname" value="<?php echo $row['fullname'] ?>" required>
+                                  <label class="text-dark" for="">Email</label>
+                                  <input class="form-control" type="text" name="email" value="<?php echo $row['email'] ?>" required>
+                                  <label class="text-dark" for="">Contact no.</label>
+                                  <input class="form-control" type="text" name="contact" value="<?php echo $row['contact'] ?>" required>
+                                  <label class="text-dark" for="">City</label>
+                                  <input class="form-control" type="text" name="city" value="<?php echo $row['city'] ?>" required>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" name="edit_user">Edit</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <!--Modal Delete-->
+                      <div class="modal fade" id="delete<?php echo $key; ?>" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title text-dark">Delete Account</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="functions.php" method="POST">
+                              
+                              <div class="text-center mt-4">
+                              <h4 class="text-dark">Are you sure to delete this account?</h4>
+                              <p class="text-dark">Deleting Account of: <?php echo $row['fullname'] ?></p>
+                              </div>
+                             
+                              <input type="hidden" name="del_pk" value="<?php echo $key; ?>">
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger" name="del_user">Delete</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <?php
+                  }
+                }else{
+                  ?>
+                  <tr>
+                    <td>No Record Retrieve</td>
+                  </tr>
+                  <?php
+                }
+              ?>
+            
       
             </table>
           </div>
         </div>
       </main>
       <!-- MAIN -->
-      <!-- Modal -->
-      <div class="modal fade" id="add" tabindex="-1" aria-labelledby="add" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title text-dark" id="add">Add User's</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="functions.php" method="POST">
-              <div class="modal-body">
-                  <label class="text-dark" for="">UID</label>
-                  <input class="form-control" type="text" name="uid" required>
-                  <label class="text-dark" for="">Full Name</label>
-                  <input class="form-control" type="text" name="fname" required>
-                  <label class="text-dark" for="">Email</label>
-                  <input class="form-control" type="text" name="email" required>
-                  <label class="text-dark" for="">Contact no.</label>
-                  <input class="form-control" type="text" name="contact" required>
-                  <label class="text-dark" for="">City</label>
-                  <input class="form-control" type="text" name="city" required>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success" name="add_user">Add</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+    
     </section>
     <!-- CONTENT -->
     <!-- <div id="chartContainer" style="height: 400px; width: 100%"></div> -->
@@ -165,7 +243,7 @@ include('db_conn.php');
             Swal.fire({
                 icon: '<?php echo $_SESSION['status_icon'] ?>',
                 title: '<?php echo $_SESSION['status'] ?>',
-                confirmButtonColor: 'rgb(139, 43, 43',
+                confirmButtonColor: '#316498',
                 confirmButtonText: 'Okay'
             });
             <?php  unset($_SESSION['status']); ?>

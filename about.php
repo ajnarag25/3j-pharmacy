@@ -31,22 +31,21 @@
     <!-- SIDEBAR -->
     <section id="sidebar">
         <h3 style="text-align: center; margin: 0 auto; display: table; margin-top: 30px;">3J's Pharmacy</h3>
-
       <ul class="side-menu top">
-        <li >
-          <a href="index.php">
+        <li class="active">
+          <a href="index.html">
             <i class="bx bx-user-pin"></i>
             <span class="text">Dashboard</span>
           </a>
         </li>
-        <li class="active">
-          <a href="users.php">
+        <li>
+          <a href="users.html">
             <i class="bx bxs-user-account"></i>
             <span class="text">Accounts</span>
           </a>
         </li>
        <li>
-				<a href="about.php">
+				<a href="about.html">
 					<i class='bx bxs-group' ></i>
 					<span class="text">About Us</span>
 				</a>
@@ -64,12 +63,11 @@
     <!-- SIDEBAR -->
 
     <section id="content">
-      <!-- NAVBAR -->
       <nav>
         <i class="bx bx-menu"></i>
         <form action="#">
           <div class="form-input">
-   
+
           </div>
         </form>
         <input type="checkbox" id="switch-mode" hidden />
@@ -77,71 +75,110 @@
       </nav>
 
       <main>
+       
+        <!-- About section -->
+        <h1 style="text-align: center;">About Us</h1>
+        <p style="text-align: center;">
+          3J's Pharmacy is a family-owned business that has been serving the
+          local community for over 30 years. Our mission is to provide the
+          highest quality pharmaceutical care to our customers. We take pride
+          in our knowledgeable staff and our commitment to customer service.
+        </p>
+      
+        <br/><br/>
 
-        <div class="table-data">
-          <div class="order">
-            <div class="head">
-              <h3>Accounts</h3>
+<br/>
+<!-- Visit Us -->
+<!-- DEVELOPERS SECTION -->
+<section id="visit">
+  <div class="container">
+    <h2 style="text-align: center;">Visit us at</h2>
+    <div class="row">
+      <div class="col-md-6 col-lg-6">
+        <div class="address">
+          <p style="text-align: center;">B147 L1 PH7 Carissa Homes Punta 1 Tanza, Cavite  </p>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-6">
+        <div class="contact">
+          <h4 style="text-align: center;">Or directly message us;</h4><p style="text-align: center;">09217351464</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- FAQ Section -->
+      <section id="faq">
+        <div class="container">
+          <br/>
+          <h2 style="text-align: center;">Frequently Asked Questions</h2><br/>
+          <div class="accordion">
+            <div class="accordion-item">
+              <div class="accordion-item-header">
+                <span class="icon">&#9654;</span> <b>How to send my prescription medication?</b>
+              </div>
+              <div class="accordion-item-body">
+                - To send your prescription medication, you can either upload a scanned copy of your prescription through our app or website, or you can have your doctor directly send the prescription to us. Once we receive your prescription, we will process it and prepare your medication for delivery or pickup. If you have any questions or concerns about the prescription submission process, please don't hesitate to contact our customer support team.                </div>
             </div>
-            <table id="myTable">
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>Full Name</th>
-                  <th>Email</th>
-                  <th>Phone Number</th>
-                  <th>City</th>
-                </tr>
-              </thead>
-              <tbody id="tbody1"></tbody>
-            </table>
+            <br/>
+            <div class="accordion-item">
+              <div class="accordion-item-header">
+                <span class="icon">&#9654;</span> <b>How to Order?</b>
+              </div>
+              <div class="accordion-item-body">
+                To order medication from 3J's Pharmacy, you can follow these steps:
+                <ol>
+                  <li>1.) Download and install our mobile app on your smartphone or tablet.</li>
+                  <li>2.) Sign up for an account and create a profile.</li>
+                  <li>3.) Browse our medication catalogue to find the items you need.</li>
+                  <li>4.) Add your desired medications to your cart.</li>
+                  <li>5.) Review your cart and make sure everything is correct.</li>
+                  <li>6.) Proceed to checkout and select your preferred payment method.</li>
+                  <li>7.) Review your order one more time and confirm your purchase.</li>
+                  <li>8.) Wait for your order to be processed and delivered to your doorstep.</li>
+                </ol>
+              </div>
+            </div>
+           <br/>
+            <div class="accordion-item">
+              <div class="accordion-item-header">
+                <span class="icon">&#9654;</span> <b>How can I avail Senior/PWD Citizen Discount?</b>
+                
+              </div>
+              <div class="accordion-item-body">
+                 To avail Senior/PWD Citizen Discount, you need to provide a valid government-issued ID as proof of eligibility upon checkout or registration of your account. The discount will be automatically applied to your total bill. Please note that the discount is only applicable to prescription medication and not to over-the-counter items.
+              </div>
+            </div>
           </div>
         </div>
-      </main>
+      </section>
 
-      <main>
-        <div class="table-data">
-          <div class="order">
-            <div class="head">
-              <h3 style="text-align: center !important">Manager Users</h3>
+      <br/><br/><br/><br/>
+
+      <!-- DEVELOPERS SECTION -->
+      <section id="developers">
+        <div class="container">
+          <h2>Meet Our Developers</h2><br/>
+          <div class="row">
+            <div class="col-md-6 col-lg-6">
+              <div class="developer">
+                <img src="https://freepngimg.com/download/anime/10-2-anime-png-images.png" alt="developer1" width="50px" height="50px">
+                <h3>Eden</h3>
+                <p>Front-end Developer</p>
+              </div>
             </div>
-            <div class="display">
-              <br />
-              <form method="POST">
-                <div>
-                  <div>
-                    UID:
-                    <input type="text" name="UID" id="uid" required/>
-                    <br /><br />
-                  </div>
-                  <div>
-                      Full Name:
-                      <input type="text" name="fullname" id="fullname" required/>
-                      <br /><br />
-                    </div>
-                  <div>
-                    Email:&nbsp; <input type="email" name="email" id="email" required/>
-                    <br /><br />
-                  </div>
-                  <div>
-                    Number: <input type="tel" name="Number" id="number" required/>
-                    <br /><br />
-                  </div>
-                  <div>
-                      City: <input type="text" name="City" id="city" required/>
-                      <br /><br />
-                    </div>
-                </div>
-
-                <div class="buttons">
-                  <button type="submit" name="insert">Insert</button>
-                  <!-- <button id="update">Update</button>
-                  <button id="delete">Delete</button> -->
-                </div>
-              </form>
+            <div class="col-md-6 col-lg-6">
+              <div class="developer">
+                <img src="https://freepngimg.com/download/anime/10-2-anime-png-images.png" alt="developer2" width="50px" height="50px">
+                <h3>Gracia</h3>
+                <p>Front-End Developer</p>
+              </div>
             </div>
           </div>
         </div>
+      </section>
       </main>
       <!-- MAIN -->
     </section>

@@ -10,18 +10,12 @@
       rel="stylesheet"
     />
     <!-- My CSS -->
-    <link rel="stylesheet" href="css/sales.css" />
-
-    <title>Daily Sales Report | 3J's Pharmacy</title>
-    <script src="js/login.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/Analytics.css" />
+    <link rel="stylesheet" href="css/crud.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Dashboard | 3J's Pharmacy</title>
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase.js"></script>
     <style>
       canvas {
         max-width: 700px;
@@ -32,9 +26,10 @@
     </style>
     <!-- <script src="/src/firebase.js"></script> -->
   </head>
-  <body>
-       <!-- SIDEBAR -->
-       <section id="sidebar">
+ 
+<body>
+ <!-- SIDEBAR -->
+ <section id="sidebar">
         <h3 style="text-align: center; margin: 0 auto; display: table; margin-top: 30px;">3J's Pharmacy</h3>
       <ul class="side-menu top">
         <li class="active" >
@@ -99,17 +94,11 @@
     </section>
     <!-- CONTENT -->
 
-    <script>
-            const logout = document.getElementById("logout");
-        logout.addEventListener("click", () => {
-        localStorage.removeItem("isLoggedIn");
-        window.location.href = "login.html";
-      });
+  <!--Scripts-->
+  <script src="js/login.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.js"></script>
 
-    </script>
-    <script src="js/average.js"></script>
-    <script src="js/script.js"></script>
-    
-    <!-- <script src="index.js"></script> -->
-  </body>
+</body>
 </html>

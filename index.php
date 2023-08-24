@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Boxicons -->
-  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
-  <!-- My CSS -->
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/bootstrap.css" />
-  <link rel="stylesheet" href="css/Analytics.css" />
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/Analytics.css" />
     <link rel="stylesheet" href="css/crud.css" />
-  <title>Admin Dashboard - 3J's Pharmacy</title>
-
-</head>
-
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Dashboard | 3J's Pharmacy</title>
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase.js"></script>
+    <style>
+      canvas {
+        max-width: 700px;
+        height: 500px;
+        margin: 0 auto;
+        display: block;
+      }
+    </style>
+    <!-- <script src="/src/firebase.js"></script> -->
+  </head>
+ 
 <body>
   <!-- SIDEBAR -->
   <section id="sidebar">
@@ -115,5 +126,4 @@
   <script src="js/bootstrap.js"></script>
 
 </body>
-
 </html>
