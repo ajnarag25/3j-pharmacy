@@ -111,9 +111,9 @@
 
       <!-- FAQ Section -->
       <section id="faq">
-        <div class="container">
+        <div class="container" style="color:black">
           <br/>
-          <h2 style="text-align: center;">Frequently Asked Questions</h2><br/>
+          <h2 style="text-align: center;" class="text-white">Frequently Asked Questions</h2><br/>
           <div class="accordion">
             <div class="accordion-item">
               <div class="accordion-item-header">

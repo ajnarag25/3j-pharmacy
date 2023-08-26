@@ -18,7 +18,7 @@ include('db_conn.php');
     <link rel="stylesheet" href="css/crud.css" />
     <link rel="stylesheet" href="css/bootstrap.css" />
     <link rel="stylesheet" href="css/style.css" />
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <title>Accounts | 3J's Pharmacy</title>
     <style>
       canvas {
@@ -254,6 +254,9 @@ include('db_conn.php');
         unset($_SESSION['status']);
     }
     ?>
- 
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+      $('#myTable').DataTable()
+    </script>
   </body>
 </html>

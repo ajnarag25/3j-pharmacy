@@ -1,0 +1,8 @@
+Install xampp latest version:
+https://www.apachefriends.org/download.html
+
+Install Composer & run in command prompt or terminal:
+composer require kreait/firebase-php
+
+Optional:
+composer require google/cloud-storage
