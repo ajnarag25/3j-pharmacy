@@ -211,9 +211,9 @@ include('db_conn.php');
                   }
                 }else{
                   ?>
-                  <tr>
+                  <!-- <tr>
                     <td>No Record Retrieve</td>
-                  </tr>
+                  </tr> -->
                   <?php
                 }
               ?>

@@ -218,7 +218,7 @@ include('db_conn.php');
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title text-dark">Delete Product:</h5>
+                              <h5 class="modal-title text-dark">Delete Product</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <form action="functions.php" method="POST">
@@ -241,9 +241,9 @@ include('db_conn.php');
                   }
                 }else{
                   ?>
-                  <tr>
+                  <!-- <tr>
                     <td>No Record Retrieve</td>
-                  </tr>
+                  </tr> -->
                   <?php
                 }
               ?>

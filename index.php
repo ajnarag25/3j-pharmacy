@@ -106,12 +106,14 @@
             </span>
           </li>
         </a>
+        <a href="ongoing.php">
         <li>
           <i class="bx bxs-package"></i>
           <span class="text">
             <p>Ongoing Deliveries</p>
           </span>
         </li>
+        </a>
       </ul>
 
 

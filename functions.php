@@ -242,4 +242,55 @@ if (isset($_POST['del_inventory'])) {
 
     header('location:inventory.php');
 }
+
+
+// ADD ORDERS TEST
+// if (isset($_POST['add_orders'])) {
+
+//     $d1 = "Aug 12, 2023";
+//     $d2 = 1234;
+//     $d3 = 123;
+//     $d4 = "Sample Item";
+//     $d5 = 12;
+//     $d6 = 120;
+
+//     $d7 = "Juan Miguel Marquez";
+//     $d8 = "Blk 4 lot 12 San Miguel St. Laguna";
+//     $d9 = "091234567";
+//     $d10 = "Pending";
+//     $d11 = "Sample Presc";
+
+//     $d12 = "G-Cash";
+//     $d13 = "400";
+//     $d14 = 3;
+
+//     $d15 = "mod delivery";
+//     $d16 = "total price";
+        
+//     $newOrders = [
+//         'DateOrder' => $d1,
+//         'ProductID' => $d2,
+//         'ItemNumber' => $d3,
+//         'ItemName' => $d4,
+//         'Discount' => $d5,
+//         'UnitPrice' => $d6,
+//         'FullName' => $d7,
+//         'ShipAddress' => $d8,
+//         'Contact' => $d9,
+//         'Status' => $d10,
+//         'Prescription' => $d11,
+//         'ModPay' => $d12,
+//         'Amount' => $d13,
+//         'Quantity' => $d14,
+//         'ModDel' => $d15,
+//         'TotalPay' => $d16,
+//     ];
+
+//     $addorderReference = $database->getReference('orders')->push($newOrders);
+
+//     echo"successfully added orders";
+// }
+
+
+
 ?>

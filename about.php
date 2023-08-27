@@ -75,7 +75,6 @@
       </nav>
 
       <main>
-       
         <!-- About section -->
         <h1 style="text-align: center;">About Us</h1>
         <p style="text-align: center;">
@@ -84,9 +83,6 @@
           highest quality pharmaceutical care to our customers. We take pride
           in our knowledgeable staff and our commitment to customer service.
         </p>
-      
-        <br/><br/>
-
 <br/>
 <!-- Visit Us -->
 <!-- DEVELOPERS SECTION -->
@@ -109,11 +105,10 @@
   </div>
 </section>
 
+      <h2 class="text-center">Frequently Asked Questions</h2>
       <!-- FAQ Section -->
       <section id="faq">
         <div class="container" style="color:black">
-          <br/>
-          <h2 style="text-align: center;" class="text-white">Frequently Asked Questions</h2><br/>
           <div class="accordion">
             <div class="accordion-item">
               <div class="accordion-item-header">
@@ -154,8 +149,6 @@
           </div>
         </div>
       </section>
-
-      <br/><br/><br/><br/>
 
       <!-- DEVELOPERS SECTION -->
       <section id="developers">
