@@ -1,131 +1,111 @@
+<?php
+include('db_conn.php');
+ session_start();
+?>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html>
 
-    <!-- Boxicons -->
-    <link
-      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <!-- My CSS -->
-    <link rel="stylesheet" href="css/Analytics.css" />
-    <link rel="stylesheet" href="css/crud.css" />
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <title>Dashboard | 3J's Pharmacy</title>
-    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase.js"></script>
-    <style>
-      canvas {
-        max-width: 700px;
-        height: 500px;
-        margin: 0 auto;
-        display: block;
-      }
-    </style>
-    <!-- <script src="/src/firebase.js"></script> -->
-  </head>
- 
+<head>
+  <title>Admin Dashboard Login</title>
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="css/style22.css" />
+  <link rel="stylesheet" href="css/bootstrap.css" />
+</head>
+
 <body>
-  <!-- SIDEBAR -->
-  <section id="sidebar">
-    <h3 style="text-align: center; margin: 0 auto; display: table; margin-top: 30px;">3J's Pharmacy</h3>
-    <ul class="side-menu top">
-      <li class="active">
-        <a href="index.php">
-          <i class="bx bx-user-pin"></i>
-          <span class="text">Dashboard</span>
-        </a>
-      </li>
-      <li>
-        <a href="users.php">
-          <i class="bx bxs-user-account"></i>
-          <span class="text">Accounts</span>
-        </a>
-      </li>
-      <li>
-        <a href="about.php">
-          <i class='bx bxs-group'></i>
-          <span class="text">About Us</span>
-        </a>
-      </li>
-    </ul>
-    <ul class="side-menu">
-      <li>
-        <a href="#" class="logout" id="logout">
-          <i class="bx bxs-log-out-circle"></i>
-          <span class="text">Logout</span>
-        </a>
-      </li>
-    </ul>
-  </section>
-  <!-- SIDEBAR -->
-
-  <section id="content">
-    <nav>
-      <i class="bx bx-menu"></i>
-      <form action="#">
-        <div class="form-input">
-
-        </div>
-      </form>
-      <input type="checkbox" id="switch-mode" hidden />
-      <label for="switch-mode" class="switch-mode"></label>
-    </nav>
-
-    <main>
-      <div class="head-title">
-        <div class="left">
-          <h1>Admin Dashboard</h1>
+  <div class="login-root">
+    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+      <div class="loginbackground box-background--white padding-top--64">
+        <div class="loginbackground-gridContainer">
+          <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
+            <div class="box-root"
+              style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
+            </div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
+            <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
+            <div class="box-root box-background--blue800" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
+            <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
+            <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
+            <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
+            <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
+            <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
+            <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;"></div>
+          </div>
         </div>
       </div>
+      <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+        <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+          <h1><a href="#" rel="dofollow">3J's Pharmacy</a></h1>
+        </div>
+        <div class="formbg-outer">
+          <div class="formbg">
+            <div class="formbg-inner padding-horizontal--48">
+              <span class="padding-bottom--15">Sign in to your Admin account</span>
+              <form action="functions.php" method="POST">
+                <center> <label for="email">Email:</label> </center>
 
-      <ul class="box-info">
-        <a href="sales.php">
-          <li>
-            <i class="bx bxs-calendar"></i>
-            <span class="text">
-              <p>Sales Report</p>
-            </span>
-          </li>
-        </a>
-        <a href="orders.php">
-          <li>
-            <i class="bx bx-book"></i>
-            <span class="text">
-              <p>View ordered prescription</p>
-            </span>
-          </li>
-        </a>
-        <a href="inventory.php">
-          <li>
-            <i class="bx bxs-basket"></i>
-            <span class="text">
-              <p>Inventory List</p>
-            </span>
-          </li>
-        </a>
-        <a href="ongoing.php">
-        <li>
-          <i class="bx bxs-package"></i>
-          <span class="text">
-            <p>Ongoing Deliveries</p>
-          </span>
-        </li>
-        </a>
-      </ul>
+                <center><input type="email" name="email" id="email-input" autocomplete="off" required /> </center>
+
+                <center> <label for="password">Password:</label> </center>
+
+                <center> <input type="password" name="password" id="password-input" autocomplete="off" required />
+                </center>
+
+                <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
+                  <label for="checkbox">
+
+                  </label>
+                </div>
+                <div class="field padding-bottom--24">
+                  <input type="submit" name="login" value="Continue">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-    </main>
-
-  </section>
-
-  <!--Scripts-->
-  <script src="js/login.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/jquery.js"></script>
   <script src="js/bootstrap.js"></script>
-
+  <script src="js/jquery.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <?php 
+        if (isset($_SESSION['status']) && $_SESSION['status'] !='')
+        {
+    ?>
+    <script>
+        $(document).ready(function(){
+            Swal.fire({
+                title: '<?php echo $_SESSION['status'] ?>',
+                confirmButtonColor: '#316498',
+                confirmButtonText: 'Okay'
+            });
+            <?php  unset($_SESSION['status']); ?>
+        })
+    </script>
+    <?php
+    }else{
+        unset($_SESSION['status']);
+    }
+    ?>
 </body>
+
 </html>

@@ -392,7 +392,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['verified_user_id'] = $uid;
                 $_SESSION['idTokenString'] = $idTokenString;
 
-                header('Location: index.php');
+                header('Location: dashboard.php');
                 exit();
             } catch (Kreait\Firebase\Exception\Auth\InvalidToken $e) {
                 echo 'The Token is Invalid: ' . $e->getMessage();
@@ -401,14 +401,12 @@ if (isset($_POST['login'])) {
             }
         } catch (Exception $e) {
             $_SESSION['status'] = 'Wrong Password';
-            $_SESSION['status_icon'] = 'error';
-            header('Location: login.php');
+            header('Location: index.php');
             exit();
         }
     } catch (Kreait\Firebase\Exception\InvalidArgumentException $e) {
         $_SESSION['status'] = 'Invalid Email Address';
-        $_SESSION['status_icon'] = 'error';
-        header('Location: login.php');
+        header('Location: index.php');
         exit();
     }
 }

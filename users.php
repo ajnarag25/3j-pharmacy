@@ -37,7 +37,7 @@ include('db_conn.php');
 
       <ul class="side-menu top">
         <li >
-          <a href="index.php">
+          <a href="dashboard.php">
             <i class="bx bx-user-pin"></i>
             <span class="text">Dashboard</span>
           </a>
@@ -57,7 +57,7 @@ include('db_conn.php');
       </ul>
       <ul class="side-menu">
         <li>
-          <a href="#" class="logout" id="logout">
+          <a href="logout.php" class="logout" id="logout">
             <i class="bx bxs-log-out-circle"></i>
             <span class="text">Logout</span>
           </a>
