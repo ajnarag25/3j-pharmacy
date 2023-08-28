@@ -1,3 +1,7 @@
+<?php
+include('db_conn.php');
+ session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -52,7 +56,7 @@
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15">Sign in to your Admin account</span>
-              <form id="login-form">
+              <form action="functions.php" method="POST">
                 <center> <label for="email">Email:</label> </center>
 
                 <center><input type="email" name="email" id="email-input" autocomplete="off" required /> </center>
@@ -68,10 +72,8 @@
                   </label>
                 </div>
                 <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Continue">
+                  <input type="submit" name="login" value="Continue">
                 </div>
-
-
               </form>
             </div>
           </div>
@@ -83,7 +85,28 @@
 
   <script src="js/bootstrap.js"></script>
   <script src="js/jquery.js"></script>
-
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <?php 
+        if (isset($_SESSION['status']) && $_SESSION['status'] !='')
+        {
+    ?>
+    <script>
+        $(document).ready(function(){
+            Swal.fire({
+                icon: '<?php echo $_SESSION['status_icon'] ?>',
+                title: '<?php echo $_SESSION['status'] ?>',
+                confirmButtonColor: '#316498',
+                confirmButtonText: 'Okay'
+            });
+            <?php  unset($_SESSION['status']); ?>
+        })
+    </script>
+    <?php
+    }else{
+        unset($_SESSION['status']);
+    }
+    ?>
 </body>
 
 </html>

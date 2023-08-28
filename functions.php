@@ -1,6 +1,7 @@
 <?php 
 include('db_conn.php');
 session_start();
+// error_reporting();
 
 // ADDING ACCOUNT USER'S
 if (isset($_POST['add_user'])) {
@@ -335,6 +336,142 @@ if (isset($_POST['decline_order'])) {
 
     header('location: ongoing.php');
 }
+
+
+// ADDING ACCOUNT ADMIN
+if (isset($_POST['add_admin'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $pass1 = $_POST['a_password'];
+    $pass2 = $_POST['a_repassword'];
+
+    if ($pass1 != $pass2) {
+        $_SESSION['status'] = 'Password does not match';
+        $_SESSION['status_icon'] = 'warning';
+    } else {
+        try {
+            $postData = [
+                'email' => $email,
+                'password' => $pass1,
+                'displayName' => $name,
+            ];
+
+            $createAdmin = $auth->createUser($postData);
+
+            $_SESSION['status'] = 'Successfully Created the Account';
+            $_SESSION['status_icon'] = 'success';
+        } catch (Kreait\Firebase\Exception\Auth\EmailExists $e) {
+            $_SESSION['status'] = 'Email Account Already Exists';
+            $_SESSION['status_icon'] = 'warning';
+        } catch (Kreait\Firebase\Exception\InvalidArgumentException $e) {
+            $_SESSION['status'] = 'Invalid Data';
+            $_SESSION['status_icon'] = 'error';
+        }
+    }
+
+    header('Location: users.php');
+    exit();
+}
+
+// LOGIN
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $pass = $_POST['password'];
+
+    try {
+        $user = $auth->getUserByEmail($email);
+
+        try {
+            $signInResult = $auth->signInWithEmailAndPassword($email, $pass);
+            $idTokenString = $signInResult->idToken();
+
+            try {
+                $verifiedIdToken = $auth->verifyIdToken($idTokenString);
+                $uid = $verifiedIdToken->claims()->get('sub');
+
+                $_SESSION['verified_user_id'] = $uid;
+                $_SESSION['idTokenString'] = $idTokenString;
+
+                header('Location: index.php');
+                exit();
+            } catch (Kreait\Firebase\Exception\Auth\InvalidToken $e) {
+                echo 'The Token is Invalid: ' . $e->getMessage();
+            } catch (\InvalidArgumentException $e) {
+                echo 'The Token could not be parsed: ' . $e->getMessage();
+            }
+        } catch (Exception $e) {
+            $_SESSION['status'] = 'Wrong Password';
+            $_SESSION['status_icon'] = 'error';
+            header('Location: login.php');
+            exit();
+        }
+    } catch (Kreait\Firebase\Exception\InvalidArgumentException $e) {
+        $_SESSION['status'] = 'Invalid Email Address';
+        $_SESSION['status_icon'] = 'error';
+        header('Location: login.php');
+        exit();
+    }
+}
+
+// EDIT ADMIN
+if (isset($_POST['edit_admin'])) {
+    $uid = $_POST['user_id'];
+
+    $newEmail = $_POST['email'];
+    $newName = $_POST['name'];
+
+    try {
+        $user = $auth->getUser($uid);
+        $updateData = [];
+        if ($newEmail !== $user->email) {
+            $updateData['email'] = $newEmail;
+        }
+        if ($newName !== $user->displayName) {
+            $updateData['displayName'] = $newName;
+        }
+        if (!empty($updateData)) {
+            $updatedUser = $auth->updateUser($uid, $updateData);
+            $_SESSION['status'] = 'Successfully Updated the Account';
+            $_SESSION['status_icon'] = 'success';
+        } else {
+            $_SESSION['status'] = 'No changes to update';
+            $_SESSION['status_icon'] = 'info';
+        }
+    } catch (Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+        $_SESSION['status'] = 'User not found';
+        $_SESSION['status_icon'] = 'warning';
+    } catch (Kreait\Firebase\Exception\InvalidArgumentException $e) {
+        $_SESSION['status'] = 'Invalid Data';
+        $_SESSION['status_icon'] = 'error';
+    }
+
+    header('Location: users.php');
+    exit();
+}
+
+// DELETE ADMIN
+if (isset($_POST['del_admin'])) {
+    $uid = $_POST['user_id'];
+
+    try {
+        $auth->deleteUser($uid);
+
+        $_SESSION['status'] = 'Successfully Deleted the Account';
+        $_SESSION['status_icon'] = 'success';
+    } catch (Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+        $_SESSION['status'] = 'User not found';
+        $_SESSION['status_icon'] = 'warning';
+    } catch (Kreait\Firebase\Exception\InvalidArgumentException $e) {
+        $_SESSION['status'] = 'Invalid Data';
+        $_SESSION['status_icon'] = 'error';
+    }
+
+    header('Location: users.php');
+    exit();
+}
+
+
+
 // ADD ORDERS TEST
 // if (isset($_POST['add_orders'])) {
 
