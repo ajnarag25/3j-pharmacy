@@ -12,27 +12,36 @@ if (isset($_POST['add_user'])) {
     $contact = $_POST['contact'];   
     $city = $_POST['city'];
 
-    $postData = [
-        'uid'=>$uid,
-        'fullname'=>$fullname,
-        'email'=>$email,
-        'contact'=>$contact,
-        'city'=>$city
-    ];
-
+    // Check if the email already exists in the database
     $ref_table = "users";
-    $postRef_result = $database->getReference($ref_table)->push($postData);
+    $existingUsers = $database->getReference($ref_table)->orderByChild('email')->equalTo($email)->getSnapshot()->numChildren();
 
-    if($postRef_result){
-        $_SESSION['status'] = 'Successfully Created the Account';
-        $_SESSION['status_icon'] = 'success';
-        header('location:users.php');
-    }else{
+    if ($existingUsers > 0) {
         $_SESSION['status'] = 'Email Account Already Exists';
         $_SESSION['status_icon'] = 'warning';
-        header('location:users.php');
+    } else {
+        // Prepare data to add
+        $postData = [
+            'uid' => $uid,
+            'fullname' => $fullname,
+            'email' => $email,
+            'contact' => $contact,
+            'city' => $city
+        ];
+
+        // Add the user data to the database
+        $postRef_result = $database->getReference($ref_table)->push($postData);
+
+        if ($postRef_result) {
+            $_SESSION['status'] = 'Successfully Created the Account';
+            $_SESSION['status_icon'] = 'success';
+        } else {
+            $_SESSION['status'] = 'Failed to Create the Account';
+            $_SESSION['status_icon'] = 'error';
+        }
     }
 
+    header('location: users.php');
 }
 
 // EDIT ACCOUNT USER'S
@@ -123,6 +132,27 @@ if (isset($_POST['add_inventory'])) {
         exit;
     }
 
+    // Check if the item already exists based on ProductID or ItemNumber
+    $inventoryRef = $database->getReference('inventory');
+    $query = $inventoryRef->orderByChild('ProductID')->equalTo($pid)->getSnapshot();
+    
+    if ($query->hasChildren()) {
+        $_SESSION['status'] = 'Inventory item already exists with this ProductID';
+        $_SESSION['status_icon'] = 'warning';
+        header('location: inventory.php');
+        exit;
+    }
+
+    $query = $inventoryRef->orderByChild('ItemNumber')->equalTo($itemnum)->getSnapshot();
+
+    if ($query->hasChildren()) {
+        $_SESSION['status'] = 'Inventory item already exists with this ItemNumber';
+        $_SESSION['status_icon'] = 'warning';
+        header('location: inventory.php');
+        exit;
+    }
+
+    // If item doesn't exist, add it
     $newInventory = [
         'ProductID' => $pid,
         'ItemNumber' => $itemnum,
