@@ -1,3 +1,7 @@
+<?php   
+  include('db_conn.php');
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -137,10 +141,60 @@
                         <td><?php echo $row['Amount']; ?></td>
                         <td><?php echo $row['Status']; ?></td>
                         <td>
-                          <button class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Approved"><i class='bx bx-check'></i></button>
-                          <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline"><i class='bx bx-x' ></i></button>
+                          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approved<?php echo $key; ?>"><i class='bx bx-check' data-bs-toggle="tooltip" data-bs-placement="top" title="Approved"></i></button>
+                          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#decline<?php echo $key; ?>"><i class='bx bx-x' data-bs-toggle="tooltip" data-bs-placement="top" title="Decline"></i></button>
                         </td>
                     </tr>
+
+                     <!--Modal Approved-->
+                     <div class="modal fade" id="approved<?php echo $key; ?>" tabindex="-1" aria-labelledby="approved" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title text-dark">Approved Order</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="functions.php" method="POST">
+                              
+                              <div class="text-center mt-4">
+                              <h4 class="text-dark">Are you sure approve the order?</h4>
+                              <p class="text-dark">Approving order of:<?php echo $row['FullName']; ?></p>
+                              </div>
+                              <input type="hidden" name="approve_pk" value="<?php echo $key; ?>">
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class='bx bx-x' data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel"></i></button>
+                                <button type="submit" class="btn btn-success" name="approve_order"><i class='bx bx-check' data-bs-toggle="tooltip" data-bs-placement="top" title="Approved"></i></button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!--Modal Decline-->
+                      <div class="modal fade" id="decline<?php echo $key; ?>" tabindex="-1" aria-labelledby="decline" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title text-dark">Decline Order</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="functions.php" method="POST">
+                              
+                              <div class="text-center mt-4">
+                              <h4 class="text-dark">Are you sure to decline the order?</h4>
+                              <p class="text-dark">Declining Order of: <?php echo $row['FullName'] ?></p>
+                              </div>
+                             
+                              <input type="hidden" name="decl_pk" value="<?php echo $key; ?>">
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class='bx bx-x' data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel"></i></button>
+                                <button type="submit" class="btn btn-danger" name="decline_order"><i class='bx bx-check' data-bs-toggle="tooltip" data-bs-placement="top" title="Approved"></i></button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
                     <?php 
                         }else{
                             // echo "No Pending orders";
@@ -271,8 +325,8 @@
                         <th>Total Payment</th>
                         <th>Mode of Payment</th>
                         <th>Mode of Delivery</th>
-                        <th>Status</th>
                         <th>Date Delivered</th>
+                        <th>Status</th>
                     </tr>
                   </thead>
                   <?php 
@@ -295,8 +349,20 @@
                       <td><?php echo $row['TotalPay']; ?></td>
                       <td><?php echo $row['ModPay']; ?></td>
                       <td><?php echo $row['ModDel']; ?></td>
-                      <td><?php echo $row['Status']; ?></td>
                       <td><?php echo $row['DateDelivered']; ?></td>
+                      <td>
+                        <?php
+                          if($row['Status'] == 'Pending'){
+                            echo "<label class='text-warning'>Pending</label>";
+                          }elseif($row['Status'] == 'Approved'){
+                            echo "<label class='text-primary'>For Delivery</label>";
+                          }elseif($row['Status'] == 'Delivered'){
+                            echo "<label class='text-success'>Delivered</label>";
+                          }else{
+                            echo "<label class='text-danger'>Declined</label>";
+                          }
+                        ?>
+                      </td>
                     </tr>
 
                     <?php 
@@ -318,6 +384,28 @@
     <script src="js/script.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <?php 
+          if (isset($_SESSION['status']) && $_SESSION['status'] !='')
+          {
+      ?>
+      <script>
+          $(document).ready(function(){
+              Swal.fire({
+                  icon: '<?php echo $_SESSION['status_icon'] ?>',
+                  title: '<?php echo $_SESSION['status'] ?>',
+                  confirmButtonColor: '#316498',
+                  confirmButtonText: 'Okay'
+              });
+              <?php  unset($_SESSION['status']); ?>
+          })
+      </script>
+      <?php
+      }else{
+          unset($_SESSION['status']);
+      }
+      ?>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script>
       $('#myTable1').DataTable();
@@ -325,6 +413,7 @@
       $('#myTable3').DataTable();
       $('#myTable4').DataTable();
     </script>
+
 
  
   </body>

@@ -291,7 +291,50 @@ if (isset($_POST['generate_report'])) {
     header('location: sales.php');
 }
 
+// UPDATING STATUS ORDERS
+if (isset($_POST['approve_order'])) {
+    $pk = $_POST['approve_pk'];
+    $stat = "Approved";
 
+    $status = [
+        'Status' => $stat,
+    ];
+
+    $orderRef = $database->getReference('orders/' . $pk);
+    $updateResult = $orderRef->update($status);
+
+    if ($updateResult) {
+        $_SESSION['status'] = 'Successfully Approved the Order';
+        $_SESSION['status_icon'] = 'success';
+    } else {
+        $_SESSION['status'] = 'Error Approving the Order';
+        $_SESSION['status_icon'] = 'warning';
+    }
+
+    header('location: ongoing.php');
+}
+
+if (isset($_POST['decline_order'])) {
+    $pk = $_POST['decl_pk'];
+    $stat = "Declined";
+
+    $status = [
+        'Status' => $stat,
+    ];
+
+    $orderRef = $database->getReference('orders/' . $pk);
+    $updateResult = $orderRef->update($status);
+
+    if ($updateResult) {
+        $_SESSION['status'] = 'Successfully Declined the Order';
+        $_SESSION['status_icon'] = 'success';
+    } else {
+        $_SESSION['status'] = 'Error Declining the Order';
+        $_SESSION['status_icon'] = 'warning';
+    }
+
+    header('location: ongoing.php');
+}
 // ADD ORDERS TEST
 // if (isset($_POST['add_orders'])) {
 
