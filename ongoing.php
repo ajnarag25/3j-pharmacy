@@ -103,7 +103,6 @@
                   <table id="myTable1">
                     <thead>
                       <tr>
-                        <th>#</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th>Contact</th>
@@ -113,6 +112,7 @@
                         <th>Mode of Payment</th>
                         <th>Amount</th>
                         <th>Status</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                   <?php 
@@ -127,7 +127,6 @@
                         if($row['Status'] === 'Pending'){
                     ?>
                     <tr>
-                        <td><input type="checkbox"></td>
                         <td><?php echo $row['FullName']; ?></td>
                         <td><?php echo $row['ShipAddress']; ?></td>
                         <td><?php echo $row['Contact']; ?></td>
@@ -137,6 +136,10 @@
                         <td><?php echo $row['ModPay']; ?></td>
                         <td><?php echo $row['Amount']; ?></td>
                         <td><?php echo $row['Status']; ?></td>
+                        <td>
+                          <button class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Approved"><i class='bx bx-check'></i></button>
+                          <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline"><i class='bx bx-x' ></i></button>
+                        </td>
                     </tr>
                     <?php 
                         }else{
@@ -150,9 +153,6 @@
                 </div>
                 
               </div>
-
-                <button class="btn btn-success">Approved</button>
-                <button class="btn btn-danger">Decline</button>
 
           </div>
         <div class="tab-pane fade" id="tab-content-fordel" role="tabpanel" aria-labelledby="fordel-tab">
@@ -272,6 +272,7 @@
                         <th>Mode of Payment</th>
                         <th>Mode of Delivery</th>
                         <th>Status</th>
+                        <th>Date Delivered</th>
                     </tr>
                   </thead>
                   <?php 
@@ -295,6 +296,7 @@
                       <td><?php echo $row['ModPay']; ?></td>
                       <td><?php echo $row['ModDel']; ?></td>
                       <td><?php echo $row['Status']; ?></td>
+                      <td><?php echo $row['DateDelivered']; ?></td>
                     </tr>
 
                     <?php 

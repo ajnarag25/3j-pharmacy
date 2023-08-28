@@ -1,3 +1,7 @@
+<?php
+  include('db_conn.php');
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,8 +18,8 @@
     <link rel="stylesheet" href="css/crud.css" />
     <link rel="stylesheet" href="css/bootstrap.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <title>Dashboard | 3J's Pharmacy</title>
-    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase.js"></script>
     <style>
       canvas {
         max-width: 700px;
@@ -78,15 +82,43 @@
         <div class="table-data">
           <div class="order">
             <div class="head">
-              <h3 style="text-align: center !important">Average Daily Sales</h3>
+              <h3 style="text-align: center !important">Sales Report</h3>
             </div>
-            <div><canvas id="myChart"></canvas></div>
-            <table>
+            <form action="functions.php" method="POST">
+              <div class="row text-center">
+                <div class="col">
+                  <label for="start_date">Start Date:</label>
+                  <input class="form-control" type="date" name="start_date" id="start_date" required>
+                </div>
+                <div class="col">
+                  <label for="end_date">End Date:</label>
+                  <input class="form-control" type="date" name="end_date" id="end_date" required>
+                </div>
+              </div>
+              <div class="text-center mt-3">
+                <button class="btn btn-primary w-50" name="generate_report">Generate Report</button>
+              </div>
+            </form>
+
+            <table class="mt-5" id="myTable">
               <thead>
-                <tr></tr>
+                  <tr>
+                      <th>Customer Name</th>
+                      <th>Date Ordered</th>
+                      <th>Date Delivered</th>
+                      <th>Product</th>
+                      <th>Amount</th>
+                  </tr>
               </thead>
-              <tbody></tbody>
-            </table>
+              <tbody>
+                <?php
+                // Display the stored report from the session
+                if (isset($_SESSION['sales_report'])) {
+                    echo $_SESSION['sales_report'];
+                }
+                ?>
+            </tbody>
+          </table>
           </div>
         </div>
       </main>
@@ -99,6 +131,9 @@
   <script src="js/script.js"></script>
   <script src="js/jquery.js"></script>
   <script src="js/bootstrap.js"></script>
-
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+  <script>
+    $('#myTable').DataTable();
+  </script>
 </body>
 </html>

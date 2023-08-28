@@ -243,19 +243,67 @@ if (isset($_POST['del_inventory'])) {
     header('location:inventory.php');
 }
 
+// GENERATE REPORT
+if (isset($_POST['generate_report'])) {
+    $startDate = $_POST['start_date'];
+    $endDate = $_POST['end_date'];
+
+    $salesRef = $database->getReference('orders');
+
+    if ($startDate === $endDate) {
+        // If start and end dates are equal, query for that specific date
+        $query = $salesRef->orderByChild('DateOrder')->equalTo($startDate);
+    } else {
+        // Query for the date range
+        $query = $salesRef->orderByChild('DateOrder')
+            ->startAt($startDate)
+            ->endAt($endDate);
+    }
+
+    $salesSnapshot = $query->getSnapshot();
+
+    $tableRows = '';
+
+    foreach ($salesSnapshot->getValue() as $order) {
+        $customerName = $order['FullName'];
+        $dateOrdered = $order['DateOrder'];
+        $dateDelivered = $order['DateDelivered'];
+        $product = $order['ItemName'];
+        $amount = $order['Amount'];
+
+        $tableRows .= "<tr><td>$customerName</td><td>$dateOrdered</td><td>$dateDelivered</td><td>$product</td><td>$amount</td></tr>";
+    }
+
+    // Output table rows or "No available data"
+    if ($tableRows !== '') {
+        $_SESSION['sales_report'] = $tableRows; // Store the report in the session
+        echo $tableRows;
+    } else {
+        $customerName = "No Data Available in Table";
+        $dateOrdered = "";
+        $dateDelivered = "";
+        $product = "";
+        $amount = "";
+        $message = "<tr><td>$customerName</td><td>$dateOrdered</td><td>$dateDelivered</td><td>$product</td><td>$amount</td></tr>";
+        $_SESSION['sales_report'] = $message;
+    }
+
+    header('location: sales.php');
+}
+
 
 // ADD ORDERS TEST
 // if (isset($_POST['add_orders'])) {
 
-//     $d1 = "Aug 12, 2023";
+//     $d1 = "2023-08-28";
 //     $d2 = 1234;
 //     $d3 = 123;
-//     $d4 = "Sample Item";
+//     $d4 = "Sample Item 2";
 //     $d5 = 12;
 //     $d6 = 120;
 
-//     $d7 = "Juan Miguel Marquez";
-//     $d8 = "Blk 4 lot 12 San Miguel St. Laguna";
+//     $d7 = "Julianna Marquez";
+//     $d8 = "Imus Cavite";
 //     $d9 = "091234567";
 //     $d10 = "Pending";
 //     $d11 = "Sample Presc";
@@ -266,6 +314,7 @@ if (isset($_POST['del_inventory'])) {
 
 //     $d15 = "mod delivery";
 //     $d16 = "total price";
+//     $d17 = "2023-08-28";
         
 //     $newOrders = [
 //         'DateOrder' => $d1,
@@ -284,13 +333,12 @@ if (isset($_POST['del_inventory'])) {
 //         'Quantity' => $d14,
 //         'ModDel' => $d15,
 //         'TotalPay' => $d16,
+//         'DateDelivered' => $d17,
 //     ];
 
 //     $addorderReference = $database->getReference('orders')->push($newOrders);
 
 //     echo"successfully added orders";
 // }
-
-
 
 ?>

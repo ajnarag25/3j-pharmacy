@@ -86,7 +86,7 @@
           <li>
             <i class="bx bxs-calendar"></i>
             <span class="text">
-              <p>Daily Sales Report</p>
+              <p>Sales Report</p>
             </span>
           </li>
         </a>
