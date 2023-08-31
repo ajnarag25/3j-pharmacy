@@ -1,2 +1,2 @@
 # 3jpharmacy
-Delivery System
+Delivery System using Firebase db realtime and itegration for mobile developement
