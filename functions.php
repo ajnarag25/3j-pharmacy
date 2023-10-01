@@ -3,6 +3,51 @@ include('db_conn.php');
 session_start();
 // error_reporting();
 
+// LOGIN
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $pass = $_POST['password'];
+
+    try {
+        $user = $auth->getUserByEmail($email);
+    
+        if ($user !== null) {
+            try {
+                $signInResult = $auth->signInWithEmailAndPassword($email, $pass);
+                $idTokenString = $signInResult->idToken();
+                $verifiedIdToken = $auth->verifyIdToken($idTokenString);
+                $uid = $verifiedIdToken->claims()->get('sub');
+    
+                // Store user ID and token in session
+                $_SESSION['verified_user_id'] = $uid;
+                $_SESSION['idTokenString'] = $idTokenString;
+    
+                // Redirect to the dashboard
+                header('Location: dashboard.php');
+                exit();
+            } catch (Kreait\Firebase\Exception\Auth\InvalidToken | \InvalidArgumentException $e) {
+                handleAuthenticationError('Invalid Credentials');
+            } catch (Exception $e) {
+                handleAuthenticationError('Wrong Password');
+            }
+        } else {
+            handleAuthenticationError('User does not exist');
+        }
+    } catch (Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+        handleAuthenticationError('Invalid Credentials');
+    } catch (Kreait\Firebase\Exception\InvalidArgumentException $e) {
+        handleAuthenticationError('Invalid Email Address');
+    }
+    
+}
+
+// Function to handle authentication errors and redirect
+function handleAuthenticationError($errorMessage) {
+    $_SESSION['status'] = $errorMessage;
+    header('Location: index.php');
+    exit();
+}
+
 // ADDING ACCOUNT USER'S
 if (isset($_POST['add_user'])) {
     
@@ -401,44 +446,6 @@ if (isset($_POST['add_admin'])) {
 
     header('Location: users.php');
     exit();
-}
-
-// LOGIN
-if (isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $pass = $_POST['password'];
-
-    try {
-        $user = $auth->getUserByEmail($email);
-
-        try {
-            $signInResult = $auth->signInWithEmailAndPassword($email, $pass);
-            $idTokenString = $signInResult->idToken();
-
-            try {
-                $verifiedIdToken = $auth->verifyIdToken($idTokenString);
-                $uid = $verifiedIdToken->claims()->get('sub');
-
-                $_SESSION['verified_user_id'] = $uid;
-                $_SESSION['idTokenString'] = $idTokenString;
-
-                header('Location: dashboard.php');
-                exit();
-            } catch (Kreait\Firebase\Exception\Auth\InvalidToken $e) {
-                echo 'The Token is Invalid: ' . $e->getMessage();
-            } catch (\InvalidArgumentException $e) {
-                echo 'The Token could not be parsed: ' . $e->getMessage();
-            }
-        } catch (Exception $e) {
-            $_SESSION['status'] = 'Wrong Password';
-            header('Location: index.php');
-            exit();
-        }
-    } catch (Kreait\Firebase\Exception\InvalidArgumentException $e) {
-        $_SESSION['status'] = 'Invalid Email Address';
-        header('Location: index.php');
-        exit();
-    }
 }
 
 // EDIT ADMIN
